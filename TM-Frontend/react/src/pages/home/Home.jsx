@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -43,10 +43,11 @@ const Home = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <p>Not have a Account register <Link to="/register-user">Here.</Link></p>
           <button type="submit">Submit</button>
         </form>
       </div>
-       <button onClick={() => navigate("/adminLogin")}>Admin Login</button>
+       <button onClick={() => navigate("/adminLogin")} className={styles.adminBut}>Admin Login</button>
        </div>
      </>
   );

@@ -21,6 +21,10 @@
     border-radius: 17px;
     border: 2px solid black;
 }
+.adminBut{
+    border: 2px solid #afafaf;
+    padding: 6px;
+}
 form input {
     margin-top: 10px;
     text-align: center;
@@ -41,4 +45,7 @@ button{
 button:hover{
     background-color: rgb(235, 235, 235);
     box-shadow: 0px 4px 10px rgba(131, 136, 141, 0.4);
+}
+a{
+    text-decoration: none;
 }

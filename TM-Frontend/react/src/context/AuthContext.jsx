@@ -8,7 +8,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
   const [user,setUser] = useState(null);
-  const[loading,setLoading] = useState(true);
+  const[loading,setLoading] = useState(false);
+  const[message,setMessage] = useState("");
 //   const navigate = useNavigate();
  
   useEffect(()=>{
@@ -34,6 +35,27 @@ export const AuthProvider = ({ children }) => {
     }
     verifyUser();
   },[]);
+    const register = async (name,email,password) => {
+        console.log("registerLoading...");
+        
+        setLoading(true);
+        try {
+            const res = await instance.post("/user/register",{name,email,password});
+            console.log("registerRes: ",res);
+            setMessage(res.data.message);
+            setTimeout(() => {
+              setMessage("");
+            },2000);
+            
+            return true;
+        } catch (error) {
+            console.log(error
+            );
+            return false;
+        } finally{
+            setLoading(false);
+        }
+    }
     const login = async (emailOrUserName,password,isAdmin=false) => {
       try {
         const endpoint = isAdmin ? "/admin/login" :"/user/login";
@@ -48,7 +70,7 @@ export const AuthProvider = ({ children }) => {
       }
     }
   return (
-    <AuthContext.Provider value={{login}}>
+    <AuthContext.Provider value={{login,register,loading,message}}>
       {children}
     </AuthContext.Provider>
   );

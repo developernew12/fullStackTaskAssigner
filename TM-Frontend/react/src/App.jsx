@@ -14,6 +14,7 @@ import AdminDashboard from './pages/adminDash/AdminDashboard';
 import AuthProvider from './context/AuthContext';
 import "./App.css";
 import AdminLayout from './layouts/adminlayout/AdminLayout';
+import Register from './pages/register/Register';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path:"/verify-email",
         element:<VerifyEmail />,
+      },
+      {
+       path:"/register-user",
+       element:<Register />
       },
       {
         path:"*",
