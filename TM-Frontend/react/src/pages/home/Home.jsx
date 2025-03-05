@@ -5,11 +5,13 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
-//   const {  } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    console.log("handleSubmitLoding...");
+    
     e.preventDefault();
     await login(email, password, false);
   };
@@ -28,11 +30,15 @@ const Home = () => {
           <input
             type="email"
             placeholder="Email"
+            name='email'
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
             type="password"
+            value={password}
+            name="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             required
