@@ -16,7 +16,10 @@ const Home = () => {
   return (
      <>
      <div className={styles.mainDiv}>
-     <h1>taskAssigner</h1>
+        <div className={styles.heading}>
+         <h1>taskAssigner</h1>
+        </div>
+    
   
       <div className={styles.container}>
         {/* <button onClick={()=> navigate("/userLogin")}>User Login</button> */}

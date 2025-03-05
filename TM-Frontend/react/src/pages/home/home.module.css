@@ -15,6 +15,12 @@
     align-items: center;
     gap: 30px;
 }
+.heading{
+    background-color: rgb(202, 204, 206);
+    padding: 10px;
+    border-radius: 17px;
+    border: 2px solid black;
+}
 form input {
     margin-top: 10px;
     text-align: center;
