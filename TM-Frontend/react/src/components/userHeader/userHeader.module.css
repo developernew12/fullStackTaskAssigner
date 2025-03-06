@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: hsl(0, 0%, 94%);
+}
+button{
+    border: 2px solid black;
+}

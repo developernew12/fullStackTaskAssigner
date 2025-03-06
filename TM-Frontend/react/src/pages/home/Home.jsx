@@ -5,18 +5,29 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login,message,loading,user } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     console.log("handleSubmitLoding...");
+   
     
     e.preventDefault();
-    await login(email, password, false);
+    await login(email, password, false,navigate);
   };
+
+  if(loading) {
+    return(
+      <div className={styles.loadingPage}>
+      <img src="/loading.gif" alt="Loading..." width="300px" />
+      <h2>Loading, please wait...</h2>
+    </div>
+    )
+  }
   return (
      <>
+     
      <div className={styles.mainDiv}>
         <div className={styles.heading}>
          <h1>taskAssigner</h1>
@@ -24,6 +35,8 @@ const Home = () => {
     
   
       <div className={styles.container}>
+        {/* {message && <h3>{message}</h3>} */}
+      
         {/* <button onClick={()=> navigate("/userLogin")}>User Login</button> */}
         <h2>User_Login</h2>
         <form onSubmit={handleSubmit} >
@@ -44,7 +57,7 @@ const Home = () => {
             required
           />
           <p>Not have a Account register <Link to="/register-user">Here.</Link></p>
-          <button type="submit">Submit</button>
+          <button type="submit">{loading ? "Submiting..." : "Submit"}</button>
         </form>
       </div>
        <button onClick={() => navigate("/adminLogin")} className={styles.adminBut}>Admin Login</button>

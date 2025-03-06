@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import instance from "../services/axiosInstance";
 
 
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user,setUser] = useState(null);
   const[loading,setLoading] = useState(false);
   const[message,setMessage] = useState("");
-//   const navigate = useNavigate();
+
  
   useEffect(()=>{
 
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         console.log("AuthContext Loading Effect");
         
         try {
-            const adminRes = await instance.get("/admin/verify-admin");
+            const adminRes = await instance.get("/admin/verify-user");
             console.log("adminRes: ",adminRes);
             return;
         } catch (error) {
@@ -56,21 +56,41 @@ export const AuthProvider = ({ children }) => {
             setLoading(false);
         }
     }
-    const login = async (emailOrUserName,password,isAdmin=false) => {
+    const login = async (emailOrUserName,password,isAdmin=false,navigate) => {
+      setLoading(true);
       try {
         const endpoint = isAdmin ? "/admin/login" :"/user/login";
         console.log("endpoint: ",endpoint);
         
         const res = await instance.post(endpoint,{email:emailOrUserName,password});
         console.log("login res: ",res);
+
+        setMessage(res.data.message);
         
+        // if(res.data.user){
+        //   setUser(res.data.user);
+        // } else{
+        //   setUser(res.data.admin);
+        // }
+        setUser(res.data.user || res.data.admin);
+        console.log("user: ",res.data.user || res.data.admin);
+        setTimeout(() => {
+          setMessage("");
+          navigate(res.data.user?.role === "admin" ? "/admin/dashboard" :"/user/dashboard");
+          setLoading(false); 
+        },2000);
+
       } catch (error) {
         console.log("loginError: ",error);
-        
-      }
+        setMessage(error.response.data.message);
+        setTimeout(()=>{
+         setMessage("");
+         setLoading(false);
+        },2000);
+      } 
     }
   return (
-    <AuthContext.Provider value={{login,register,loading,message}}>
+    <AuthContext.Provider value={{login,register,loading,message,user}}>
       {children}
     </AuthContext.Provider>
   );
