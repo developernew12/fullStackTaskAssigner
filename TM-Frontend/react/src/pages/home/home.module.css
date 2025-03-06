@@ -35,7 +35,7 @@ img{
     border: 2px solid black;
 }
 .adminBut{
-    border: 2px solid #afafaf;
+    border: 3px solid rgb(243, 150, 87);
     padding: 6px;
 }
 form input {

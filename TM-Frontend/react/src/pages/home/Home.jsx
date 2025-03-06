@@ -35,7 +35,7 @@ const Home = () => {
     
   
       <div className={styles.container}>
-        {/* {message && <h3>{message}</h3>} */}
+        {message && <h3>{message}</h3>}
       
         {/* <button onClick={()=> navigate("/userLogin")}>User Login</button> */}
         <h2>User_Login</h2>
@@ -57,6 +57,7 @@ const Home = () => {
             required
           />
           <p>Not have a Account register <Link to="/register-user">Here.</Link></p>
+          <Link to="/requestResetPassword"><p>Reset Password</p></Link>
           <button type="submit">{loading ? "Submiting..." : "Submit"}</button>
         </form>
       </div>

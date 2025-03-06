@@ -174,7 +174,7 @@ export async function resetPasswordRequest(req, res) {
 
 export async function resetPassword(req, res) {
   const {token,newPassword} = req.body;
-  console.log(token,newPassword);
+  // console.log(token,newPassword);
   
   try {
     if(!token) {
