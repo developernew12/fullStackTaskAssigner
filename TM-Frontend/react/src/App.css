@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.head{
+    padding: 15px 0px;
+}
+
+.box{
+    margin: 15px 20px;
+    padding: 15px;
+}
+
+button{
+    padding: 4px 0px;
+    width: 160px;
+}
+
+.alert{
+    margin: 10px 7px;
+    padding: 0px 7px;
+}
+
+.alert input, textarea{
+    margin: 7px 0px;
+    padding: 0px 7px;
+}
