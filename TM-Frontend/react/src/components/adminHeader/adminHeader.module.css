@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(150, 195, 235);
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.navHead{
+    font-size: larger;
+    font-weight: 700;
+} 
+ul{
+    display: flex;
+    gap: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+ul li{
+    border: 2px solid black;
+    padding: 7px;
+    border-radius: 10px;
+}
+.button button{
+    padding: 7px;
+    border: none;
+    background-color: #4d64e4;
+}
+@media (max-width:768px){
+    .button{
+        display: none;
+    }
+    
+}

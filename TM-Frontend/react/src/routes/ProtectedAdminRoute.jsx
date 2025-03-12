@@ -1,20 +1,25 @@
 import React, { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext';
+
 import { Navigate } from 'react-router-dom';
+import { AdminContext } from '../context/AdminContext';
 
 const ProtectedAdminRoute = ({children}) => {
   
-  const { user,loading } = useContext(AuthContext);
-
-  if(loading) return(
-    <div>
+  const { admin,adminLoading } = useContext(AdminContext);
+  console.log(" Protected Admin Route: Admin =", admin);
+  if (adminLoading === undefined) {
+    console.error(" authLoading is undefined! Fix in AuthContext");
+    return null;
+  }
+  if(adminLoading) return(
+    <div id='loadingMin'>
       <img src='/loading.gif'/>
       <p>Loading...</p>
     </div>
   )
   
-  if(!user || user.role !== "admin"){
-    return <Navigate to="/"/>;
+  if(!admin || admin.role !== "admin"){
+    return <Navigate to="/adminLogin"/>;
   }
 
   return children;

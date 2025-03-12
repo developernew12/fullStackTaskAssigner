@@ -1,7 +1,7 @@
 import React from 'react'
 import AdminHeader from '../../components/adminHeader/AdminHeader'
 
-const AdminLayout = (children) => {
+const AdminLayout = ({children}) => {
   return (
     <div>
       <AdminHeader/>

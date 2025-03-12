@@ -18,6 +18,7 @@ import Register from "./pages/register/Register";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
 import RequestResetPassword from "./pages/requestResetPass/RequestResetPassword";
 import { SnackbarProvider } from "notistack";
+import AdminProvider from "./context/AdminContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,10 +27,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-      },
-      {
-        path: "/userLogin",
-        element: <UserLogin />,
       },
       {
         path: "/adminLogin",
@@ -86,9 +83,13 @@ const App = () => {
       autoHideDuration={3000}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
+     <AdminProvider>
       <AuthProvider>
+        
         <RouterProvider router={router} />
+        
       </AuthProvider>
+      </AdminProvider>
     </SnackbarProvider>
   );
 };

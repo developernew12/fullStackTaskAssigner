@@ -6,6 +6,8 @@ export async function adminAuth(req,res,next){
     
     try {
         const token = req.cookies.adminToken;
+        console.log("token from admin idd",token);
+        
         if(!token){
           return  res.status(401).send({message:"Not Authorized"});
         }

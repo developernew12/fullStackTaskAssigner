@@ -13,7 +13,7 @@ const Home = () => {
     console.log("handleSubmitLoding...");
 
     e.preventDefault();
-    await login(email, password, false, navigate);
+    await login(email, password, navigate);
   };
 
   if (loading) {
@@ -31,15 +31,14 @@ const Home = () => {
         Your browser does not support the video tag.
       </video>
       <div className={styles.mainDiv}>
-        <div className={styles.heading}>
-          <h1>taskAssigner</h1>
-        </div>
-
         <div className={styles.container}>
           {message && <h3>{message}</h3>}
-
-          {/* <button onClick={()=> navigate("/userLogin")}>User Login</button> */}
-          <h2>User_Login</h2>
+          <div className={styles.logo}>
+          <img src="/logo.webp" alt="" srcset="" width="200px" className={styles.img}/>
+          </div>
+          
+          {/* <button o  nClick={()=> navigate("/userLogin")}>User Login</button> */}
+          <h1 className={styles.h1}>USERLOGIN</h1>
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -70,7 +69,7 @@ const Home = () => {
           onClick={() => navigate("/adminLogin")}
           className={styles.adminBut}
         >
-          Admin Login
+          Admin
         </button>
       </div>
     </>

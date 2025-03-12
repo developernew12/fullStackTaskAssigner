@@ -3,11 +3,11 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 export const verifyUsery = async (req, res, next) => {
     try {
-        console.log("Cookies:", req.cookies); 
+        // console.log("Cookies:", req.cookies); 
 
         const token = req.cookies.token;
         if (!token) {
-            console.log("No token found!");
+            // console.log("No token found!");
             return res.status(401).json({ message: "Unauthorized - No token" });
         }
 

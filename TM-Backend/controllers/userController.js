@@ -91,7 +91,7 @@ export async function login(req,res) {
 // This is for Verify User Function
 export const verifyUser = async (req, res) => {
     try {
-      console.log(req.cookies.token);
+      // console.log(req.cookies.token);
       
         const token = req.cookies.token;
         if (!token) return res.status(401).send({ message: "Unauthorized" });
@@ -102,11 +102,12 @@ export const verifyUser = async (req, res) => {
         console.log(user);
         
         if (!user) return res.status(404).send({ message: "User not found" });
-        res.status(200).json({message:"User Verified",  user: {
+        res.status(200).send({message:"User Verified",  user: {
           // _id: user._id,
           _id: user._id, 
           name: user.name,
           email: user.email,
+          role:user.role,
         } });
     } catch (error) {
         res.status(500).json({ message: "Server error" });
