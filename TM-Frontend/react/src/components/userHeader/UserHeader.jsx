@@ -1,17 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import styles from "./userHeader.module.css";
 
 const UserHeader = () => {
-  const {user,logout} = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      logout();
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <div>
-        <h2>Hello,{user.name}!</h2>
+      <div className={styles.greeting}>
+        <h2>Welcome, {user.name}!</h2>
       </div>
-      <button>LogOut</button>
+      <button className={styles.logoutButton} onClick={handleLogout}>Log Out</button>
     </div>
-  )
-}
+  );
+};
 
-export default UserHeader
+export default UserHeader;

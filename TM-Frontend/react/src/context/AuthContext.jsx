@@ -1,41 +1,69 @@
 import { createContext, useState, useEffect } from "react";
-
-import instance from "../services/axiosInstance";
 import { useSnackbar } from "notistack";
+import instance from "../services/axiosInstance";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true);
   const { enqueueSnackbar } = useSnackbar();
 
+  // ✅ Verify logged-in user on page load
   useEffect(() => {
     const verifyUser = async () => {
-      console.log("AuthContext Loading Effect");
+      console.log("AuthContext: Verifying user...");
+      setLoading(true);
 
-      try {
-        const adminRes = await instance.get("/admin/verify-user");
-        console.log("adminRes: ", adminRes); setUser(adminRes.data);
-        return;
-      } catch (error) {
-        console.log("adminError: ", error);
-      }
       try {
         const userRes = await instance.get("/user/verify-user");
-        console.log("userRes: ", userRes);
-        setUser(userRes.data);
-        return;
+        console.log("User Verified:", userRes.data);
+        setUser(userRes.data.user);
       } catch (error) {
-        console.log("userError: ", error);
+        console.log("User Verification Error:", error);
+        setUser(null);
       }
+
+      setLoading(false);
     };
+
     verifyUser();
   }, []);
-  const register = async (name, email, password) => {
-    console.log("registerLoading...");
 
+  // ✅ Login Function (Accepts navigate as a parameter)
+  const login = async (email, password, isAdmin = false, navigate) => {
+    setLoading(true);
+
+    try {
+      const endpoint = isAdmin ? "/admin/login" : "/user/login";
+      console.log("Login Attempt:", endpoint);
+
+      const res = await instance.post(endpoint, { email, password });
+
+      enqueueSnackbar(res.data.message, { variant: "success" });
+      setUser(res.data.user || res.data.admin);
+
+      // ✅ Redirect user after successful login
+      navigate(
+        res.data.user?.role === "admin"
+          ? "/admin/dashboard"
+          : "/user/dashboard"
+      );
+
+      return true;
+    } catch (error) {
+      console.error("Login Error:", error);
+      enqueueSnackbar(error.response?.data?.message || "Login failed", {
+        variant: "error",
+      });
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ Register New User
+  const register = async (name, email, password) => {
     setLoading(true);
     try {
       const res = await instance.post("/user/register", {
@@ -43,117 +71,70 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
-      console.log("registerRes: ", res);
-      setMessage(res.data.message);
-      setTimeout(() => {
-        setMessage("");
-      }, 2000);
 
-      return true;
+      enqueueSnackbar(res.data.message, { variant: "success" });
+
+      return true; // ✅ Return true if registration succeeds
     } catch (error) {
-      console.log(error);
+      console.log("Register Error:", error);
+      enqueueSnackbar(error.response?.data?.message || "Registration failed", { variant: "error" });
+
       return false;
     } finally {
       setLoading(false);
     }
   };
-  const login = async (
-    emailOrUserName,
-    password,
-    isAdmin = false,
-    navigate
-  ) => {
-    setLoading(true);
+
+  // ✅ Logout
+  const logout = async () => {
     try {
-      const endpoint = isAdmin ? "/admin/login" : "/user/login";
-      console.log("endpoint: ", endpoint);
-
-      const res = await instance.post(endpoint, {
-        email: emailOrUserName,
-        password,
-      });
-      console.log("login res: ", res);
-
-      // setMessage(res.data.message);
-      enqueueSnackbar(res.data.message, { variant: "success" });
-      // if(res.data.user){
-      //   setUser(res.data.user);
-      // } else{
-      //   setUser(res.data.admin);
-      // }
-      setUser(res.data.user || res.data.admin);
-      console.log("user: ", res.data.user || res.data.admin);
-      setTimeout(() => {
-        setMessage("");
-        navigate(
-          res.data.user?.role === "admin"
-            ? "/admin/dashboard"
-            : "/user/dashboard"
-        );
-        setLoading(false);
-      }, 2000);
+      await instance.post("/user/logout");
+      setUser(null);
+      enqueueSnackbar("Logged out successfully", { variant: "success" });
     } catch (error) {
-      console.log("loginError: ", error);
-      // setMessage(error.response.data.message);
-      enqueueSnackbar(error.response.data.message, { variant: "error" });
-      setTimeout(() => {
-        //  setMessage("");
-        setLoading(false);
-      }, 2000);
-      // setTimeout(()=>{
-      //   setMessage("");
-      // },4000);
+      console.error("Logout failed:", error);
     }
   };
+
+  // ✅ Request Password Reset
   const requestResetPassword = async (email) => {
     setLoading(true);
     try {
-      const res = await instance.post("/user/reset-password-request", {
-        email,
-      });
-      setLoading(false);
-      // setMessage(res.data.message);
-      enqueueSnackbar("Password reset Link Sent To Your Email", {
-        variant: "success",
-      });
-      // setTimeout(() => {
-      //   setMessage("");
-      // }, 2000);
+      await instance.post("/user/reset-password-request", { email });
+      enqueueSnackbar("Password reset link sent to your email", { variant: "success" });
     } catch (error) {
-      enqueueSnackbar(error.response?.data?.message || "And error occured", {
-        variant: "error",
-      });
-      console.log(error);
+      console.log("Reset Password Request Error:", error);
+      enqueueSnackbar(error.response?.data?.message || "An error occurred", { variant: "error" });
     } finally {
       setLoading(false);
     }
   };
-  const resetPassword = async (password,token) => {
-    console.log("resetPassowordTrig...","This is token",token);
+
+  // ✅ Reset Password
+  const resetPassword = async (password, token) => {
     setLoading(true);
     try {
-      const res = await instance.post("/user/reset-password", {
-         token,
-         newPassword: password,
+      await instance.post("/user/reset-password", {
+        token,
+        newPassword: password,
       });
-      enqueueSnackbar(res.data.message, { variant: "success" });
+      enqueueSnackbar("Password reset successfully", { variant: "success" });
     } catch (error) {
-      console.log(error);
-      enqueueSnackbar(error.response?.data?.message || "And error occured", {
-        variant: "error",
-      });
-    } finally{
+      console.log("Reset Password Error:", error);
+      enqueueSnackbar(error.response?.data?.message || "An error occurred", { variant: "error" });
+    } finally {
       setLoading(false);
     }
   };
+
   return (
     <AuthContext.Provider
       value={{
-        login,
-        register,
-        loading,
-        message,
         user,
+        loading,
+        login, // ✅ Now requires navigate to be passed from components
+        register,
+        logout,
         requestResetPassword,
         resetPassword,
       }}
