@@ -151,9 +151,7 @@ const UserDashBoard = () => {
       : completedTasks;
 
   return (
-    <div
-      className="main p-8 bg-cover bg-center"
-    >
+    <div className="main p-8 bg-cover bg-center">
       {modal && createPortal(modal, document.body)}
       <div className="h-screen w-full bg-zinc-300 bg-opacity-80 p-8 shadow-2xl">
         <h1 className="head text-4xl font-extrabold text-center text-gray-800 mt-10">
@@ -243,9 +241,13 @@ const UserDashBoard = () => {
 
                     {task.status !== "Completed" &&
                       !isDeadlinePassed &&
-                      (task.extensionRequested ? (
-                        <p className="text-green-400 text-sm font-semibold">
-                          Extension Requested
+                      (task.extensionApproved ? (
+                        <p className="text-green-500 text-sm font-semibold">
+                          ✅ Extension Approved!
+                        </p>
+                      ) : task.extensionRequested ? (
+                        <p className="text-yellow-400 text-sm font-semibold">
+                          ⏳ Extension Requested
                         </p>
                       ) : (
                         <button
