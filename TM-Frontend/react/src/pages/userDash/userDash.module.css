@@ -9,10 +9,11 @@
   gap: 20px;
 }
 .CardContainer{
-    display: flex;
-    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* display: flex; */
+    grid-template-columns: 1fr 1fr 1fr ;
     /* justify-content: center; */
     align-items: center;
+    display: grid;
     /* flex-direction: column; */
     gap: 20px;
     width: 100%;

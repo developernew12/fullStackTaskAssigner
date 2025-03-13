@@ -12,12 +12,16 @@ const AdminHeader = () => {
    
       <div className={styles.container}>
             <div className={styles.navHead}>
-              <h2>Hello,{admin.username}!</h2> 
+              {/* <h2>Hello,{admin.username}!</h2>  */}
+              <img src="/logo.webp" alt="" srcset="" />
             </div>
             <div className={styles.button}>
-              <ul>
+              <ul >
                 <li>deadlineRequests</li>
                 <li>users</li>
+                <li>createTask</li>
+                <li>assignedTasks</li>
+                <li>allTasks</li>
               </ul>
               <button styles={styles.logout} onClick={()=>logout()}>Logout</button>
             </div>

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import instance from "../../services/axiosInstance";
 import styles from "./adminDash.module.css";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-
+import CountUp from "react-countup";
+import { AdminContext } from "../../context/AdminContext";
 const AdminDashboard = () => {
+  const{admin} = useContext(AdminContext);
   const [dashboardData, setDashboardData] = useState({
     totalUsers: 0,
     totalTasks: 0,
@@ -51,10 +53,17 @@ const AdminDashboard = () => {
       ) : (
         <div className={styles.ItemContainer}>
           <div className={styles.leftContainer}>
-            <p>Total Users:<em>{dashboardData.totalUsers}</em></p>
+            {/* <p>Total Users:<em>{dashboardData.totalUsers}</em></p>
             <p>Total Tasks:<em>{dashboardData.totalTasks}</em> </p>
             <p>Ongoing Tasks:<em>{dashboardData.ongoingTasks}</em></p>
-            <p>Completed Tasks:<em>{dashboardData.completedTasks}</em></p>
+            <p>Completed Tasks:<em>{dashboardData.completedTasks}</em></p> */}
+            <h2 className={styles.username}>Hello,{admin.username}!</h2> 
+
+<p>Total Users: <em><CountUp end={dashboardData.totalUsers} duration={2} /></em></p>
+<p>Total Tasks: <em><CountUp end={dashboardData.totalTasks} duration={2} /></em></p>
+<p>Ongoing Tasks: <em><CountUp end={dashboardData.ongoingTasks} duration={2} /></em></p>
+<p>Completed Tasks: <em><CountUp end={dashboardData.completedTasks} duration={2} /></em></p>
+
           </div>
           <div className={styles.rightContainer}>
             <PieChart width={400} height={300}>
@@ -86,8 +95,10 @@ const AdminDashboard = () => {
             </PieChart>
           </div>
         </div>
+        
       )}
     </div>
+
   );
 };
 
