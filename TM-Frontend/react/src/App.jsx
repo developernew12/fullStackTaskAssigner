@@ -2,15 +2,14 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import First from "./layouts/first/First";
 import Home from "./pages/home/Home";
-import UserLogin from "./pages/userLogin/UserLogin";
-import AdminLogin from "./pages/adminLogin/AdminLogin";
+import AdminLogin from "./pages/ADMIN/adminLogin/AdminLogin";
 import VerifyEmail from "./pages/verifyEmail/VerifyEmail";
 import NotFound from "./pages/notFound/NotFound";
 import ProtectedUserRoute from "./routes/ProtectedUserRoute";
 import UserLayout from "./layouts/userLayout/UserLayout";
 import UserDashBoard from "./pages/userDash/UserDashBoard";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute";
-import AdminDashboard from "./pages/adminDash/AdminDashboard";
+import AdminDashboard from "./pages/ADMIN/adminDash/AdminDashboard";
 import AuthProvider from "./context/AuthContext";
 import "./App.css";
 import AdminLayout from "./layouts/adminlayout/AdminLayout";
@@ -19,6 +18,11 @@ import ResetPassword from "./pages/resetPassword/ResetPassword";
 import RequestResetPassword from "./pages/requestResetPass/RequestResetPassword";
 import { SnackbarProvider } from "notistack";
 import AdminProvider from "./context/AdminContext";
+import ExtensionRequests from "./pages/ADMIN/extensionRequests/ExtensionRequests";
+import Users from "./pages/ADMIN/users/Users";
+import CreateTasks from "./pages/ADMIN/createTasks/CreateTasks";
+import AssignedTasks from "./pages/ADMIN/assignedTasks/AssignedTasks";
+import AllTasks from "./pages/ADMIN/allTasks/AllTasks";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,14 +67,20 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/dashboard",
+        path: "/admin",
         element: (
           <ProtectedAdminRoute>
-            <AdminLayout>
-              <AdminDashboard />
-            </AdminLayout>
+            <AdminLayout />
           </ProtectedAdminRoute>
         ),
+        children: [
+          { index: true, element: <AdminDashboard /> },
+          { path: "extensionRequests", element: <ExtensionRequests /> },
+          { path: "users", element: <Users /> },
+          { path: "createTask", element: <CreateTasks /> },
+          { path: "assignedTasks", element: <AssignedTasks /> },
+          { path: "allTasks", element: <AllTasks /> },
+        ],
       },
     ],
   },
@@ -83,12 +93,10 @@ const App = () => {
       autoHideDuration={3000}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
-     <AdminProvider>
-      <AuthProvider>
-        
-        <RouterProvider router={router} />
-        
-      </AuthProvider>
+      <AdminProvider>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
       </AdminProvider>
     </SnackbarProvider>
   );

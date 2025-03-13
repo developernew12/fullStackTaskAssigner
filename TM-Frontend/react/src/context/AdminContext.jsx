@@ -94,7 +94,7 @@ export const AdminProvider = ({ children }) => {
         console.log("✅ Setting Admin:", res.data.admin);
         setAdmin(res.data.admin); // Store admin in state
         enqueueSnackbar(res.data.message, { variant: "success" });
-        navigate("/admin/dashboard");
+        navigate("/admin");
       } else {
         console.log("❌ Admin data missing from response");
       }

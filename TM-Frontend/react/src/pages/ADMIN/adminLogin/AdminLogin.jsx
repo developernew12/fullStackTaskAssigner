@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styles from "./adminLogin.module.css";
 import { useNavigate } from 'react-router-dom';
-import { AdminContext } from '../../context/AdminContext';
+import { AdminContext } from '../../../context/AdminContext';
 const AdminLogin = () => {
   const { login, loading } = useContext(AdminContext);
   const [username, setUserName] = useState("");

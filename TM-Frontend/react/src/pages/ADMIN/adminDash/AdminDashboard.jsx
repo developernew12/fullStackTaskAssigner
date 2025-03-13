@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import instance from "../../services/axiosInstance";
+import instance from "../../../services/axiosInstance";
 import styles from "./adminDash.module.css";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import CountUp from "react-countup";
-import { AdminContext } from "../../context/AdminContext";
+import { AdminContext } from "../../../context/AdminContext";
 const AdminDashboard = () => {
   const{admin} = useContext(AdminContext);
   const [dashboardData, setDashboardData] = useState({

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 
 import styles from "./adminHeader.module.css";
 import { AdminContext } from '../../context/AdminContext';
+import { Link } from 'react-router-dom';
 const AdminHeader = () => {
 
   const { admin,logout }  = useContext(AdminContext);
@@ -17,11 +18,12 @@ const AdminHeader = () => {
             </div>
             <div className={styles.button}>
               <ul >
-                <li>deadlineRequests</li>
-                <li>users</li>
-                <li>createTask</li>
-                <li>assignedTasks</li>
-                <li>allTasks</li>
+                <li><Link to="/admin">dashboard</Link></li>
+                <li><Link to="/admin/extensionRequests">extensionRequests</Link></li>
+                <li><Link to="/admin/users">users</Link></li>
+                <li><Link to="/admin/createTask">createTask</Link></li>
+                <li><Link to="/admin/assignedTasks">assignedTasks</Link></li>
+                <li><Link to="/admin/allTasks">allTasks</Link></li>
               </ul>
               <button styles={styles.logout} onClick={()=>logout()}>Logout</button>
             </div>
