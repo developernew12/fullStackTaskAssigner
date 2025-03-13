@@ -97,13 +97,19 @@ export const updateTaskStatus = async (req, res) => {
         if (task.deadline < now) {
             return res.status(403).send({ message: "Cannot request extension after the deadline" });
         }
+        
+        if(new Date(newDeadline) <= now){
+            return res.status(400).send({message:"New deadline must be a future date"});
+         }   
+        console.log("🔹 Received newDeadline:", newDeadline);
+        console.log("🔹 Parsed newDeadline:", new Date(newDeadline));
 
         task.extensionRequested = true;
-        task.newDeadline = new Date(newDeadline);
+        task.newDeadLine = new Date(newDeadline);
         task.extensionReason = reason;
 
         await task.save();
-
+        console.log("✅ Task Updated in Database:", task);
         res.status(200).send({
             message: "Deadline extension requested",
             task: {
@@ -111,7 +117,7 @@ export const updateTaskStatus = async (req, res) => {
                 title: task.title,
                 requestedBy: { name: task.assignedTo.name, email: task.assignedTo.email },
                 reason: task.extensionReason,
-                newDeadline: task.newDeadline
+                newDeadline: task.newDeadLine
             }
         });
 
@@ -137,14 +143,22 @@ export const approveDeadlineExtension = async (req, res) => {
         if (!task.extensionRequested) {
             return res.status(400).send({ message: "No extension request found for this task" });
         }
-
-        if (approved) {
-            task.deadline = new Date(newDeadline);
-            task.extensionApproved = true;
-        } else {
-            task.extensionApproved = false;
+        
+        if(approved){
+            if(!newDeadline || isNaN(Date.parse(newDeadline))){
+                return res.status(400).send({message:"Valid new dealine is required"});
+            }
+        
+        
+        const now = new Date();
+        if(new Date(newDeadline) <= now){
+            return re.status(400).send({message:"New deadline must be a future date"});
         }
-
+        task.deadline = new Date(newDeadline);
+        task.extensionApproved = true;
+    }   else{
+        task.extensionApproved = false;
+    }
         task.extensionRequested = false; 
         // task.newDeadline = null; 
         await task.save();
@@ -169,11 +183,11 @@ export const getAllExtensionRequests = async (req, res) => {
     try {
         const pendingRequests = await Task.find({ extensionRequested: true })
             .populate("assignedTo", "name email")  
-            .select("title extensionReason newDeadline assignedTo deadline");
+            .select("title extensionReason newDeadLine assignedTo deadline");
 
-        if (pendingRequests.length === 0) {
-            return res.status(200).send({ message: "No pending extension requests" });
-        }
+        // if (pendingRequests.length === 0) {
+        //     return res.status(200).send({ message: "No pending extension requests" });
+        // }
 
         res.status(200).send({ extensionRequests: pendingRequests });
     } catch (error) {

@@ -32,7 +32,7 @@ ul{
     border-radius: 10px;
 } */
  .button ul li{
-    border: 3px solid rgb(252, 78, 78);
+    border: 3px solid rgb(0, 33, 218);
     padding: 7px;
     border-radius: 10px;
  }
@@ -41,11 +41,13 @@ ul{
  }
 .button button:hover{
     background-color: hsl(0, 0%, 91%);
+    color: black;
  }
 .button button{
     padding: 7px;
     /* border: none; */
-    background-color: #4d64e4;
+    background-color: #2942d1;
+    color: white;
 }
 @media (max-width:768px){
     .button{

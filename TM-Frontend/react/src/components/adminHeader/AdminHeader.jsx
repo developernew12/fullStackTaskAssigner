@@ -17,7 +17,8 @@ const AdminHeader = () => {
               <img src="/logo.webp" alt="" srcset="" />
             </div>
             <div className={styles.button}>
-              <ul >
+              <ul>
+                <li><Link to="/">Home</Link></li>
                 <li><Link to="/admin">dashboard</Link></li>
                 <li><Link to="/admin/extensionRequests">extensionRequests</Link></li>
                 <li><Link to="/admin/users">users</Link></li>

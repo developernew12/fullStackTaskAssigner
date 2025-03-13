@@ -108,15 +108,23 @@ export const getAdminDashBoard = async (req,res) => {
     res.status(500).send({message:"Error fetching admin dashboard data",error});
   }
 };
-export const getAllTasks = async (req,res) => {
-  try {
-    const tasks = await Task.find()
-    .populate("assignedTo","name email")
-    .populate("assignedBy","username")
-    .select("title status deadline assignedTo extensionRequested extensionReason");
+// export const getAllTasks = async (req,res) => {
+//   try {
+//     const tasks = await Task.find()
+//     .populate("assignedTo","name email")
+//     .populate("assignedBy","username")
+//     .select("title status deadline assignedTo extensionRequested extensionReason");
 
-    res.status(200).send(tasks);
+//     res.status(200).send(tasks);
+//   } catch (error) {
+//     res.status(500).send({message:"error fetching tasks",error});
+//   }
+// }
+export const getAllUsers = async (req,res) => {
+  try {
+    const users = await Users.find().select("_id name email");
+    res.status(200).send(users);
   } catch (error) {
-    res.status(500).send({message:"error fetching tasks",error});
+    res.status(500).send({message:"Error fetching users",error});
   }
 }

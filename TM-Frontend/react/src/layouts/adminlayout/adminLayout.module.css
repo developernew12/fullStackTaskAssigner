@@ -2,3 +2,6 @@
     background: linear-gradient(to left, #e0eafc, #cfdef3);
     height: 100vh;
 }
+.pageContent{
+    height: 80vh;
+}

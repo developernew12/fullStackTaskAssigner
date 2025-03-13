@@ -38,7 +38,7 @@ const AdminDashboard = () => {
   const charData = [
     {name : "CompletedTasks", value: dashboardData.completedTasks},
     {name: "OngoingTasks", value: dashboardData.ongoingTasks},
-    {name:"TotalTasks", value: dashboardData.totalTasks}
+    // {name:"TotalTasks", value: dashboardData.totalTasks}
   ]
   const COLORS = ["#00C49F","#FF8042","#FF9942"];
 

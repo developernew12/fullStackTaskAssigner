@@ -230,6 +230,7 @@ export const AuthProvider = ({ children }) => {
   }
   const requestDeadline = async (taskId,newDeadline,reason) => {
     try {
+      console.log("🔹 Sending newDeadline:", newDeadline);
       if(!newDeadline || isNaN(new Date(newDeadline))){
         enqueueSnackbar("Invalid date Format! use YYYY-MM-DD.",{variant:"warning"});
         return;
@@ -238,8 +239,8 @@ export const AuthProvider = ({ children }) => {
         enqueueSnackbar("Reason cannot be empty!",{variant:"warning"});
         return;
       }
-      await instance.post(`/task/request-extension/${taskId}`,{newDeadline,reason});
-
+      await instance.post(`/task/request-extension/${taskId}`,{newDeadline: new Date(newDeadline),reason});
+      console.log("✅ Request Sent Successfully:",newDeadline,reason );
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task._id === taskId ? { ...task, extensionRequested: true } : task
@@ -248,11 +249,12 @@ export const AuthProvider = ({ children }) => {
       enqueueSnackbar("Deadline extension requested!", { variant: "success" });
     } catch (error) {
       console.error("Error requesting deadline:", error.response?.data || error.message);
-      enqueueSnackbar("Failed to request deadline.", { variant: "error" });
+      enqueueSnackbar(error.response?.data || error.message, { variant: "error" });
     }
   }
   const logout = async () => {
     await instance.post("/user/logout"); // Clear cookie on the backend
+    enqueueSnackbar("Logout Successfull!!", { variant: "success" });
     setUser(null); // Remove user from state
   };
   return (

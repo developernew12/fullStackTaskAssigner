@@ -75,7 +75,8 @@ export const AdminProvider = ({ children }) => {
   }, []);
 
   const logout = async () => {
-    await instance.post("/admin/logout"); // Clear cookie on the backend
+    await instance.post("/admin/logout");
+    enqueueSnackbar("Log Out Successfully!", { variant: "success" }); // Clear cookie on the backend
     setAdmin(null); // Remove user from state
   };
   const login = async (

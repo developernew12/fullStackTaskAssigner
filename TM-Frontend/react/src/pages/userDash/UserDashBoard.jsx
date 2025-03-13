@@ -17,7 +17,7 @@ const UserDashBoard = () => {
    fetchTasks();
   }, []);
 
-  console.log("Tasks Data:", tasks); // Debugging task data
+  // console.log("Tasks Data:", tasks); // Debugging task data
 
   /** Toggle request deadline input field */
   const toggleRequestDeadline = (taskId) => {
@@ -39,6 +39,7 @@ const UserDashBoard = () => {
       alert("Reason cannot be empty");
       return;
     }
+ 
     requestDeadline(taskId, deadlineData.newDeadline, deadlineData.reason);
     setExpandedTask(null);
   };
