@@ -194,5 +194,12 @@ export const getAllExtensionRequests = async (req, res) => {
         res.status(500).send({ message: "Error fetching extension requests", error });
     }
 };
-
+export const getAllTasks = async(req,res) => {
+    try {
+      const totalTasks = await Task.find().populate("assignedTo","name email").populate("assignedBy","username").select("title status deadline assignedTo assignedBy");
+      res.status(200).send(totalTasks);
+    } catch (error) {
+      res.status(500).send({ message: "Error fetching tasks", error });
+    }
+  }
  

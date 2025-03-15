@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAdminDashBoard, getAllUsers, getAllUsersWithTasks, login, verifyAdmin } from '../controllers/adminController.js';
+import { getAdminAssignedTasks, getAdminDashBoard, getAllUsers, getAllUsersWithTasks, login, verifyAdmin } from '../controllers/adminController.js';
 import { adminAuth } from '../middlewares/adminAuthMidd.js';
 import { logOut } from '../controllers/adminController.js';
 
@@ -15,4 +15,6 @@ adminRouter.get("/dashboard",adminAuth,getAdminDashBoard);
 //     res.send({message:"Welcome, Admin",admin: req.admin});
 // })
 adminRouter.get("/all-users",adminAuth,getAllUsers);
+adminRouter.get("/assigned-tasks", adminAuth, getAdminAssignedTasks);
+
 export default adminRouter;

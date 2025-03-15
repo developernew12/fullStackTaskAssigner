@@ -128,3 +128,20 @@ export const getAllUsers = async (req,res) => {
     res.status(500).send({message:"Error fetching users",error});
   }
 }
+export const getAdminAssignedTasks = async (req, res) => {
+  console.log("request from adin",req.body);
+  
+  try {
+    const adminId = req.admin._id; 
+    
+    
+    const tasks = await Task.find({ assignedBy: adminId })
+      .populate("assignedTo", "name email")
+      .select("title status deadline assignedTo");
+
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching admin assigned tasks", error });
+  }
+};
+

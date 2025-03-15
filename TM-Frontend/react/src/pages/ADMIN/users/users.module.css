@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    padding: 20px;
+    background: #f4f4f4;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .searchInput:focus {
+    border-color: #3a86ff;
+  }
+  
+  .userTable {
+    
+    border-collapse: collapse;
+    background: white;
+  }
+ .tasksTitle{
+    display: flex;
+    flex-direction: column;
+  }
+  .userTable th,
+  .userTable td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .userTable th {
+    background: #3a86ff;
+    color: white;
+  }
+  
+  .userTable tr:hover {
+    background: #e3f2fd;
+  }
+  .tasksTitle{
+    max-width: 60%;
+
+  }
+  
