@@ -7,7 +7,11 @@ export async function createTask (req,res) {
         if(!title || !description || !deadline || !assignedTo){
             return res.status(400).send({message:"All fields are required"});
         }
-
+        const now = new Date();
+        const taskDeadline = new Date(deadline);
+        if(taskDeadline < now){
+            return res.status(400).send({message:"Deadline must be in the future"});
+        }
         const user = await Users.findById(assignedTo);
         if(!user){
             return res.status(404).send({message:"Assigned User not found"});

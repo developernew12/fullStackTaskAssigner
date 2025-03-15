@@ -62,6 +62,7 @@ const AssignedTasks = () => {
                 <td>{task.assignedTo?.name || "Unassigned"}</td>
                 <td>{new Date(task.deadline).toLocaleDateString()}</td>
                 <td>{task.status}</td>
+                
               </tr>
             ))}
           </tbody>

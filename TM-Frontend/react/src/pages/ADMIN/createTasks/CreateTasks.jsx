@@ -49,6 +49,7 @@ const CreateTask = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     if (
       !taskData.title ||
@@ -59,7 +60,12 @@ const CreateTask = () => {
       enqueueSnackbar("All fields are required!", { variant: "error" });
       return;
     }
-
+    const now = new Date();
+    const taskDeadline = new Date(taskData.deadline);
+    if(taskDeadline < now){
+      enqueueSnackbar("Date must be a future date", { variant: "error" });
+      return;
+    }
     try {
       await instance.post("/task/create", {
         title: taskData.title,
@@ -159,7 +165,7 @@ const CreateTask = () => {
           className={styles.date}
           required
         />
-
+        
         <button type="submit" className={styles.submit}>
           Create Task
         </button>

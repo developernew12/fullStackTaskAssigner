@@ -10,6 +10,7 @@ const AdminLayout = ({children}) => {
         <Outlet/>
       </div>
     </div>
+    
   )
 }
 
