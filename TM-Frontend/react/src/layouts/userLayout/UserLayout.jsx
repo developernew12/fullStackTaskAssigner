@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import UserHeader from '../../components/userHeader/UserHeader'
+import { Outlet } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const UserLayout = ({children}) => {
+  const { darkMode } = useContext(AuthContext);
   return (
-    <div>
+    <div className={darkMode ? "dark-layout" : ""}>
       <UserHeader/>
-      <main>{children}</main>
+      <Outlet/>
     </div>
   )
 }

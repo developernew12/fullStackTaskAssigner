@@ -14,7 +14,7 @@ const ProtectedUserRoute = ({children}) => {
   }
   if (authLoading) {
     return (
-      <div >
+      <div id='loadingMin'>
         <img src="/loading.gif" width="400px" />
         <p>Loading...</p>
       </div>

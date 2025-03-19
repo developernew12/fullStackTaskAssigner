@@ -1,11 +1,44 @@
 .container{
     display: flex;
-    justify-content: center;
-    align-items: center;
+     
     justify-content: space-between;
-    padding: 10px;
-    background-color: hsl(0, 0%, 94%);
+    align-items: center;
+    
+    height: 60px;
+    padding: 0 20px;
 }
-button{
+
+.dark .container {
+    background-color: #1e1e1e !important;
+    color: white;
+}
+.dark .headerH2 {
+    color: white;
+}
+.headerH2{
+    font-weight: 700;
+    margin: 0; 
+    color: red;
+    font-size: 1.4em;
+}
+.logout{
+    border: 3px solid black;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.logout:hover{
+    transform: scale(1.1);
+    background-color: red;
+    color: white;
+    border: none;
+}
+.darkModeBtn:hover {
+    background-color: #444;
+    color: white;
+}
+.darkModeBtn {
+    padding: 5px 10px;
     border: 2px solid black;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
 }

@@ -12,7 +12,11 @@ export const AuthProvider = ({ children }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [authLoading, setAuthLoading] = useState(true);
   const [tasks,setTasks] = useState([]);
-
+  
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+ 
   console.log(user);
   useEffect(() => {
     const verifyUser = async () => {
@@ -64,7 +68,15 @@ export const AuthProvider = ({ children }) => {
      verifyUser();
   }, []);
  
-  
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
   const register = async (name, email, password) => {
     console.log("registerLoading...");
 
@@ -130,7 +142,7 @@ export const AuthProvider = ({ children }) => {
       setTimeout(() => {
         setMessage("");
         setLoading(false);
-        navigate("/user/dashboard");
+        navigate("/user");
         
       }, 2000);
       
@@ -272,7 +284,8 @@ export const AuthProvider = ({ children }) => {
         updateTaskStatus,
         tasks,
         requestDeadline,
-        authLoading
+        authLoading,
+        darkMode, setDarkMode 
       }}
     >
       {children}

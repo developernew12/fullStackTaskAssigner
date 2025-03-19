@@ -9,9 +9,14 @@ const RequestResetPassword = () => {
         await requestResetPassword (email);
     }
   return (
+    <>
+    <video autoPlay loop muted className={styles.bgVideo}>
+                    <source src="/1.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
     <div className={styles.container}>
         {message && <p>{message}</p>}
-      <h2>Reset Password</h2>
+      <h1>Reset Password</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -20,9 +25,11 @@ const RequestResetPassword = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit">{loading ? "Sending..." : "Send Reset Link"}</button>
+        <button type="submit">{loading ? "Sending..." : "Send Link"}</button>
       </form>
     </div>
+    </>
+    
   )
 }
 

@@ -36,13 +36,18 @@ const Register = () => {
    
    
   return (
-    <div className={styles.container}>
+    <>
+    <video autoPlay loop muted className={styles.bgVideo}>
+            <source src="/1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        <div className={styles.container}>
         {message && <p>{message}</p>}
         {error && <p>{error}</p>}
-        <div className={styles.heading}>
-                 <h1>taskAssigner</h1>
-                </div>
-       <h2>User_Register</h2>
+        <div className={styles.logo}>
+                  <img src="/logo.webp" alt="" srcset="" width="200px" className={styles.img}/>
+                  </div>
+       <h2>USER REGISTER</h2>
         <form onSubmit={handleSubmit} >
         <input
             type="text"
@@ -79,6 +84,8 @@ const Register = () => {
           <button type="submit">{loading ? "Submiting..." : "Submit" }</button>
         </form>
     </div>
+    </>
+
   )
 }
 

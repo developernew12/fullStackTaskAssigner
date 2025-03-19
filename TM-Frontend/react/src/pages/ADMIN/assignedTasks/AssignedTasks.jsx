@@ -33,7 +33,7 @@ const AssignedTasks = () => {
     <div className={styles.container}>
       <h2>Tasks Assigned by Me</h2>
 
-
+     
       <input
         type="text"
         placeholder="Search tasks..."

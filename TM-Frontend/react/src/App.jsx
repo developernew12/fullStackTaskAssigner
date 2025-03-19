@@ -23,6 +23,7 @@ import Users from "./pages/ADMIN/users/Users";
 import CreateTasks from "./pages/ADMIN/createTasks/CreateTasks";
 import AssignedTasks from "./pages/ADMIN/assignedTasks/AssignedTasks";
 import AllTasks from "./pages/ADMIN/allTasks/AllTasks";
+import TaskDetails from "./pages/taskDetails/TaskDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,14 +58,16 @@ const router = createBrowserRouter([
         element: <NotFound />,
       },
       {
-        path: "/user/dashboard",
+        path: "/user",
         element: (
           <ProtectedUserRoute>
-            <UserLayout>
-              <UserDashBoard />
-            </UserLayout>
+            <UserLayout />
           </ProtectedUserRoute>
         ),
+        children: [
+          { path: "/user", element: <UserDashBoard /> },
+          { path: "task/:taskId", element: <TaskDetails /> }, 
+        ],
       },
       {
         path: "/admin",

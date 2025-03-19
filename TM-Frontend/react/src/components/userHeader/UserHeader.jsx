@@ -8,10 +8,10 @@ const UserHeader = () => {
   
   return (
     <div className={styles.container}>
-      <div>
-      {user ? <h2>Hello, {user.name}!</h2> : <h2>Loading...</h2>}
-      </div>
-      <button onClick={()=> logout()}>LogOut</button>
+      
+      {user ? <h2 className={styles.headerH2}>Hello, {user.name}!</h2> : <h2>Loading...</h2>}
+      
+      <button className={styles.logout} onClick={()=> logout()}>LogOut</button>
     </div>
   )
 }

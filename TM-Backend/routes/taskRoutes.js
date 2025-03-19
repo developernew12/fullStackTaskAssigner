@@ -6,6 +6,7 @@ import {
   createTask,
   getAllExtensionRequests,
   getAllTasks,
+  getSpecificTask,
   requestDeadlineExtension,
   updateTaskStatus,
 } from "../controllers/taskController.js";
@@ -26,4 +27,5 @@ taskRouter.post(
   approveDeadlineExtension
 );
 taskRouter.get('/all-tasks',adminAuth,getAllTasks);
+taskRouter.get("/:id",verifyUsery,getSpecificTask);
 export default taskRouter;

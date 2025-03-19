@@ -37,3 +37,14 @@
 #loadingMin img{
     width: 400px;
 }
+/* Global Dark Mode */
+.dark-mode {
+    background-color: #121212 !important;
+    color: white !important;
+  }
+  
+  .dark-layout {
+    background-color: #181818 !important;
+    color: white;
+  }
+  

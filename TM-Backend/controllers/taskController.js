@@ -206,4 +206,18 @@ export const getAllTasks = async(req,res) => {
       res.status(500).send({ message: "Error fetching tasks", error });
     }
   }
+
+export const getSpecificTask = async(req,res) => {
+    console.log("SPECIFIC================",req);
+    
+    try {
+        const task = await Task.findById(req.params.id);
+        if(!task){
+            return res.status(404).send({message:"Task not found"});
+        }
+        res.send(task);
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
  

@@ -15,7 +15,12 @@ const ResetPassword = () => {
     await resetPassword(password,token);
   };
   return (
-    <div className={styles.container}>
+    <>
+    <video autoPlay loop muted className={styles.bgVideo}>
+                <source src="/1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+     <div className={styles.container}>
       <h1>Set a new Password</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -28,6 +33,8 @@ const ResetPassword = () => {
         <button type="submit">{loading ? "Submiting..." : "Submit"}</button>
       </form>
     </div>
+    </>
+   
   );
 };
 
