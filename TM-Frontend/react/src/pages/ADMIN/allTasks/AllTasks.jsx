@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./alltasks.module.css";
 import instance from "../../../services/axiosInstance";
 import { useSnackbar } from "notistack";
+import { AdminContext } from "../../../context/AdminContext";
 const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { enqueueSnackbar } = useSnackbar();
   const [searchTerm, setSearchTerm] = useState("");
-
+  const {darkMode} = useContext(AdminContext)
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -23,6 +24,8 @@ const AllTasks = () => {
   };
   useEffect(() => {
     fetchData();
+    const interval = setInterval(fetchData, 35000);
+    return () => clearInterval(interval);
   }, []);
   const filteredTasks = tasks.filter(
     (task) =>
@@ -33,9 +36,23 @@ const AllTasks = () => {
         .includes(searchTerm.toLowerCase()) ||
       task.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
+   const getStatusClass = (status) => {
+      switch (status.toLowerCase()) {
+        case "pending":
+          return styles.pending;
+        case "not done":
+          return styles.notDone;
+        case "completed":
+          return styles.completed;
+        case "in progress":
+          return styles.inProgress;
+        default:
+          return "";
+      }
+    };
   return (
-    <div className={styles.container}>
-      <h2>All Assigned Tasks</h2>
+    <div className={`${darkMode ? styles.darkContainer : styles.container}`}>
+      <h2>All Tasks</h2>
 
       <input
         type="text"
@@ -62,10 +79,10 @@ const AllTasks = () => {
             {filteredTasks.map((task) => (
               <tr key={task._id}>
                 <td>{task.title}</td>
-                <td>{task.assignedTo?.name || "Unassigned"}</td>
-                <td>{task.assignedBy?.username || "Unknown"}</td>
-                <td>{new Date(task.deadline).toLocaleDateString()}</td>
-                <td>{task.status}</td>
+                <td className={styles.assignedTo}>{task.assignedTo?.name || "Unassigned"}</td>
+                <td className={styles.assignedBy}>{task.assignedBy?.username || "Unknown"}</td>
+                <td className={styles.deadLine}>{new Date(task.deadline).toLocaleDateString()}</td>
+                <td className={`${styles.taskStatus} ${getStatusClass(task.status)}`}>{task.status}</td>
               </tr>
             ))}
           </tbody>

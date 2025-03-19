@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { login, message, loading, user } = useContext(AuthContext);
+  const { login, message, loading, user,darkMode } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +18,7 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className={styles.loadingPage}>
+      <div className={`${darkMode ? styles.DarkloadingPage : styles.loadingPage}`}>
         <img src="/loading.gif" alt="Loading..." width="300px" />
         <h2>Loading, please wait...</h2>
       </div>

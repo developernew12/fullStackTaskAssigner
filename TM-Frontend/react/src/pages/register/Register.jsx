@@ -3,7 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import styles from "./register.module.css";
 
 const Register = () => {
-    const {register,loading,message} = useContext(AuthContext);
+    const {register,loading,message,darkMode} = useContext(AuthContext);
     const[email,setEmail] = useState("");
     const[name,setName]=useState("");
     const[password,setPassword]=useState("");
@@ -41,7 +41,7 @@ const Register = () => {
             <source src="/1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        <div className={styles.container}>
+        <div className={`${darkMode ? styles.darkContainer : styles.container}`}>
         {message && <p>{message}</p>}
         {error && <p>{error}</p>}
         <div className={styles.logo}>

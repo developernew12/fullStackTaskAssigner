@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import styles from "./requestReset.module.css";
 import { AuthContext } from '../../context/AuthContext';
 const RequestResetPassword = () => {
-    const { requestResetPassword,loading,message } = useContext(AuthContext);
+    const { requestResetPassword,loading,message,darkMode } = useContext(AuthContext);
     const [email,setEmail] = useState();
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,7 +14,7 @@ const RequestResetPassword = () => {
                     <source src="/1.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
-    <div className={styles.container}>
+    <div className={`${darkMode ? styles.darkContainer : styles.container}`}>
         {message && <p>{message}</p>}
       <h1>Reset Password</h1>
       <form onSubmit={handleSubmit}>

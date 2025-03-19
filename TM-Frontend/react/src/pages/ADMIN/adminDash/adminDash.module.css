@@ -10,11 +10,32 @@
    
     padding: 20px;
 }
+.darkContainer{
+    margin-top: 20px;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.darkContainer h1{
+    font-weight: 700;
+}
+.darkContainer .ItemContainer{
+    background-color: black;
+    color: white;
+}
+.darkContainer .leftContainer h2{
+    color: white;
+    font-weight: 700;
+}
 .leftContainer .username{
     font-size: 2em;
     font-weight: 300;
     color: #0c0c5e;
     margin-bottom: 10px;
+    text-align: start;
 }
 
 .mainContainer h1 {
@@ -37,6 +58,7 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     height: 90%;
     flex-wrap: wrap;
+    gap: 100px;
 }
 
 .leftContainer em{
@@ -45,7 +67,9 @@
     margin-left: 10px;
 }
 .leftContainer {
-    flex: 1;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
 }
 
@@ -63,44 +87,33 @@
     align-items: center;
     justify-content: center;
 }
+
+/* Make legend a column in small screens */
 @media (max-width: 768px) {
-    .navHead {
-        font-size: 1em; 
+    .legend {
+      display: none;
     }
-    h1{
-
-     font-size: 0.5em;
+  
+    /* Adjust chart container */
+    .rightContainer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .button {
-        display: none;  
+  
+    .rightContainer svg {
+      max-width: 90%;
     }
+  
+    /* Text Adjustments */
+    .leftContainer p {
+      font-size: 1.5em;
+    }
+  
+    /* Reduce space in smaller screens */
     .ItemContainer {
-        flex-direction: column;  
-        height: auto;  
-        padding: 20px;
-        align-items: center;
-        text-align: center;
+      gap: 30px;
+      padding: 15px;
     }
-
-    .leftContainer, 
-    .rightContainer {
-        width: 100%;  
-        text-align: center; 
-        padding: 10px 0;
-    }
-
-    .rightContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .rightContainer svg { 
-        max-width: 100%; 
-    }
-
-    h1 {
-        font-size: 2em;  
-}
-
-}
+  }

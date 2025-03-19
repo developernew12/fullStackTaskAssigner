@@ -3,7 +3,7 @@ import styles from "./adminLogin.module.css";
 import { useNavigate } from 'react-router-dom';
 import { AdminContext } from '../../../context/AdminContext';
 const AdminLogin = () => {
-  const { login, loading } = useContext(AdminContext);
+  const { login, loading,darkMode } = useContext(AdminContext);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const AdminLogin = () => {
   };
   return (
     <div>
-        <div className={styles.container}>
+        <div className={`${darkMode ? styles.onlyLogin : styles.container}`}>
           <img src="/logo.webp" alt="" width="200px" />
           <form onSubmit={handleSubmit} className={styles.form} >
            <h2>ADMINLOGIN</h2>
@@ -43,3 +43,5 @@ const AdminLogin = () => {
 }
 
 export default AdminLogin
+
+

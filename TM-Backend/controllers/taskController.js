@@ -220,4 +220,18 @@ export const getSpecificTask = async(req,res) => {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 }
- 
+export const deleteTask = async (req,res) => {
+    try {
+        const {taskId} = req.params;
+
+        const task= await Task.findById(taskId);
+
+        if(!task){
+            return res.status(404).send({message:"Task Not Found"});
+        }
+        await Task.findByIdAndDelete(taskId);
+        res.status(200).send({message:"Task deleted Successfully"});
+    } catch (error) {
+        res.status(500).send({ message: "Error deleting task", error });
+    }
+}

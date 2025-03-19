@@ -1,18 +1,75 @@
 .container {
     width: 100%;
-    padding: 20px;
+    padding: 30px;
     background: linear-gradient(to left, #e0eafc, #cfdef3);
+    
+  }
+  .darkContainer{
+    width: 100%;
+    padding: 30px;
+    background-color: black;
+    height: 100vh;
+  }
+  .darkContainer h2{
+    color: white;
+  }
+  .searchInput{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    background-color: white;
+    border-radius: 4px;
+  }
+  .darkContainer .searchInput{
+    background-color: rgb(43, 37, 37);
+  }
+  .taskStatus{
+    font-weight: 700;
+   
+  }
+  .pending {
+    
+    color: #ffc107;
   }
   
+  .notDone {
+   
+    color: red;
+  }
+  .inProgress{
+    color: #3a86ff;
+  }
+  .completed {
+    
+    color: #28a745;
+  }
   h2 {
     text-align: center;
     margin-bottom: 20px;
   }
-  
+  .assignedTo{
+    font-weight: 700;
+    color: green;
+    font-size: 1.2em;
+  }
+  .assignedBy{
+    font-weight: 700;
+    color: #3a86ff;
+    font-size: 1.2em;
+  }
+  .deadLine{
+    font-weight: 600;
+    color: red;
+  }
+  .darkContainer tbody td {
+    background-color: black;
+  }
   .taskTable {
     width: 100%;
     border-collapse: collapse;
     background: white;
+    height: 100vh;
   }
   
   .taskTable th,
@@ -30,4 +87,29 @@
   .taskTable tr:hover {
     background: #1f4c6b;
   }
+  .taskTable {
+    width: 100%;
+    border: 5px solid white;
+    border-radius: 10px; /* Increase radius for better effect */
+    background: white;
+    border-spacing: 0; /* Prevents spacing between borders */
+    overflow: hidden; /* Ensures border-radius applies correctly */
+  }
   
+  /* Ensure thead corners are rounded */
+  .taskTable thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+  }
+  
+  .taskTable thead tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+  }
+  
+  /* Ensure tbody corners are rounded */
+  .taskTable tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+  }
+  
+  .taskTable tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+  }

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import instance from "../../../services/axiosInstance";
 import styles from "./users.module.css";
+import { AdminContext } from "../../../context/AdminContext";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const {darkMode} = useContext(AdminContext);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -29,7 +30,7 @@ const Users = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <div className={`${darkMode ? styles.darkContainer : styles.container}`}>
       <h2>All Users & Their Tasks</h2>
 
       <input
@@ -54,8 +55,8 @@ const Users = () => {
           <tbody>
             {filteredUsers.map(({ user, tasks }) => (
               <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
+                <td   className={styles.userName}>{user.name}</td>
+                <td className={styles.userEmail}>{user.email}</td>
                 <td>
                   {tasks.length > 0 ? (
                     <ul className={styles.tasksTitle}>

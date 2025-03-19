@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./createTasks.module.css";
 import instance from "../../../services/axiosInstance";
 import { useSnackbar } from "notistack";
+import { AdminContext } from "../../../context/AdminContext";
 
 const CreateTask = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -10,6 +11,7 @@ const CreateTask = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const {darkMode} = useContext(AdminContext);
   const [taskData, setTaskData] = useState({
     title: "",
     description: "",
@@ -98,7 +100,7 @@ const CreateTask = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={`${darkMode ? styles.darkContainer : styles.container}`}>
       <h2 className={styles.h2}>Create a New Task</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input

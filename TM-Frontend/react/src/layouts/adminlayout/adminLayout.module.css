@@ -4,4 +4,12 @@
 }
 .pageContent{
     height: 100vh;
+
+}
+@media (max-width:768px){
+    .pageContent{
+        margin-top: 100px;
+      
+    }
+
 }

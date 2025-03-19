@@ -4,6 +4,7 @@ import { verifyUsery } from "../middlewares/userAuth.js";
 import {
   approveDeadlineExtension,
   createTask,
+  deleteTask,
   getAllExtensionRequests,
   getAllTasks,
   getSpecificTask,
@@ -28,4 +29,5 @@ taskRouter.post(
 );
 taskRouter.get('/all-tasks',adminAuth,getAllTasks);
 taskRouter.get("/:id",verifyUsery,getSpecificTask);
+taskRouter.delete("/delete-task/:taskId",adminAuth,deleteTask);
 export default taskRouter;

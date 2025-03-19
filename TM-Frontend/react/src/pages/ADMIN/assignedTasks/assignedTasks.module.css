@@ -1,47 +1,126 @@
 .container {
-    width: 100%;
-    padding: 20px;
-    background: #f4f4f4;
-  }
+  width: 100%;
+  padding: 30px;
+  background: #f4f4f4;
+}
+
+.darkContainer {
+  width: 100%;
+  padding: 30px;
+  background: black;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.darkContainer h2 {
+  color: white;
+}
+
+.darkContainer tbody td {
+  background-color: black;
+}
+
+.taskTable {
+  width: 100%;
+  border: 5px solid white;
+  border-radius: 10px; /* Increase radius for better effect */
+  background: white;
+  border-spacing: 0; /* Prevents spacing between borders */
+  overflow: hidden; /* Ensures border-radius applies correctly */
+}
+
+/* Ensure thead corners are rounded */
+.taskTable thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.taskTable thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Ensure tbody corners are rounded */
+.taskTable tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.taskTable tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+.deleteButton {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: darkred;
+}
+.assignedTo{
+  font-weight: 700;
+  color: green;
+  font-size: 1.2em;
+}
+.deadLine{
+  font-weight: 600;
+  color: red;
+}
+.taskStatus{
+  font-weight: 700;
+ 
+}
+.pending {
   
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+  color: #ffc107;
+}
+
+.notDone {
+ 
+  color: red;
+}
+.inProgress{
+  color: #3a86ff;
+}
+.completed {
   
-  .searchInput {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
-  }
-  
-  .searchInput:focus {
-    border-color: #3a86ff;
-  }
-  
-  .taskTable {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-  }
-  
-  .taskTable th,
-  .taskTable td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .taskTable th {
-    background: #3a86ff;
-    color: white;
-  }
-  
-  .taskTable tr:hover {
-    background: #e3f2fd;
-  }
-  
+  color: #28a745;
+}
+.searchInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: rgb(53, 53, 53);
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+.container .searchInput{
+  background-color: rgb(207, 207, 207);
+}
+.searchInput:focus {
+  border-color: #3a86ff;
+}
+
+
+
+.taskTable th,
+.taskTable td {
+  padding: 12px;
+  /* border: 1px solid #ddd; */
+  text-align: left;
+}
+
+.taskTable th {
+  background: #3a86ff;
+  color: white;
+}
+
+.taskTable tr:hover {
+  background: #e3f2fd;
+}

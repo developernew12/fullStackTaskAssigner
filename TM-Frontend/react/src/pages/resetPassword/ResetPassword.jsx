@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 const ResetPassword = () => {
   const { token } = useParams();
   const [password, setPassword] = useState("");
-  const { resetPassword,loading } = useContext(AuthContext);
+  const { resetPassword,loading,darkMode } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const ResetPassword = () => {
                 <source src="/1.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-     <div className={styles.container}>
+     <div className={`${darkMode ? styles.darkContainer : styles.container}`}>
       <h1>Set a new Password</h1>
       <form onSubmit={handleSubmit}>
         <input

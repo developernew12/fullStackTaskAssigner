@@ -12,7 +12,18 @@ export const AdminProvider = ({ children }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [adminLoading, setAdminLoading] = useState(true);
 //   const [tasks,setTasks] = useState([]);
-
+const [darkMode, setDarkMode] = useState(
+  localStorage.getItem("theme") === "dark"
+);
+useEffect(() => {
+  if (darkMode) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+  }
+}, [darkMode]);
 
   useEffect(() => {
     console.log(" AdminContext Mounted");
@@ -129,7 +140,8 @@ export const AdminProvider = ({ children }) => {
           message,
           admin,
           adminLoading,
-          logout
+          logout,
+          darkMode, setDarkMode 
         }}
       >
         {children}

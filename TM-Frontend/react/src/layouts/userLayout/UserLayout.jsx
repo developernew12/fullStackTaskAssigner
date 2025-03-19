@@ -9,6 +9,7 @@ const UserLayout = ({children}) => {
     <div className={darkMode ? "dark-layout" : ""}>
       <UserHeader/>
       <Outlet/>
+      
     </div>
   )
 }

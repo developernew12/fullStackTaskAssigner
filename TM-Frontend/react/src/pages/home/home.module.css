@@ -8,7 +8,7 @@
     gap: 10px;
     position: relative;
     z-index: 1;
-  
+    width: 100%;
 }
 .bgVideo {
     position: fixed;
@@ -31,6 +31,17 @@ img{
     margin-bottom: 15px;
 }
 .loadingPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.DarkloadingPage h2{
+    
+    color: #f3f3f3;
+}
+.DarkloadingPage{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,10 +74,11 @@ img{
     border: 1px solid rgb(247, 143, 143);
     background-color: rgb(247, 143, 143);
     padding: 6px;
+    color: white;
 }
 .adminBut:hover{
     background-color: none !important;
-    
+    color: black;
 }
 form input {
     margin-top: 10px;
@@ -96,3 +108,16 @@ button:hover{
 a{
     text-decoration: none;
 }
+@media (max-width: 768px) {
+    .container{
+         margin-top: 70px;
+         
+    }
+    form input{
+        width: 80%;
+    }
+    .mainDiv{
+        margin-bottom: 70px;
+        padding: 10px;
+    }
+  }

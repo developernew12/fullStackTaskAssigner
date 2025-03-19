@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./extensionRequests.module.css";
 import instance from "../../../services/axiosInstance";
 import { useSnackbar } from "notistack";
+import { AdminContext } from "../../../context/AdminContext";
 
 const ExtensionRequests = () => {
+  const {darkMode} = useContext(AdminContext);
   const [requests, setRequests] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
@@ -66,7 +68,7 @@ const ExtensionRequests = () => {
     }
   };
   return (
-    <div className={styles.container}>
+    <div className={`${darkMode ? styles.darkContainer : styles.container}`}>
       <h1>Extension Requests</h1>
       {loading ? (
         <>
@@ -92,9 +94,9 @@ const ExtensionRequests = () => {
             {requests.map((task) => (
               <tr key={task._id}>
                 <td>{task.title}</td>
-                <td>{task.assignedTo?.name || "Unknown"}</td>
-                <td>{new Date(task.deadline).toLocaleDateString()}</td>
-                <td>
+                <td className={styles.assignedTo}>{task.assignedTo?.name || "Unknown"}</td>
+                <td className={styles.oldDeadline}>{new Date(task.deadline).toLocaleDateString()}</td>
+                <td className={styles.newDeadline}>
                   {task.newDeadLine
                     ? new Date(task.newDeadLine).toLocaleDateString()
                     : "Not Provided"}
