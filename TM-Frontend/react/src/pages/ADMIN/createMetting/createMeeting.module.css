@@ -6,7 +6,26 @@
     justify-content: center;
     align-items: center;
   }
-  
+  .darkContainer{
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    
+  }
+  .darkContainer .formBox {
+    background: #242020;
+    color: white;
+    box-shadow: -1px 4px 4px rgba(141, 141, 141, 0.8);
+  }
+  .darkContainer .formBox .heading,.darkContainer .formBox  label{
+    color: white;
+  }
+  .darkContainer .input{
+    color: black;
+  }
   .formBox {
     background: #fff;
     padding: 2.5rem;
@@ -15,7 +34,9 @@
     width: 100%;
     max-width: 600px;
   }
-  
+  .selectContainer{
+    width: 80%;
+  }
   .heading {
     text-align: center;
     font-size: 2rem;
@@ -53,17 +74,30 @@
   
   .selectBox {
     width: 100%;
-    height: 150px;
     padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  .darkContainer .option{
+    color: #222;
+  }
+  .searchBox {
+    margin: 1rem 0;
+  }
+  
+  .searchBox input {
+    width: 100%;
+    padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;
   }
   
   .submitBtn {
-    padding: 0.8rem;
+    
     font-size: 1rem;
-    background-color: #007bff;
+    background-color: #20642c;
     color: white;
     border: none;
     border-radius: 8px;
@@ -72,6 +106,110 @@
   }
   
   .submitBtn:hover {
-    background-color: #0056b3;
+    background-color: #f9fcff;
+    color: black;
   }
+  .selectContainer {
+    margin-top: 1rem;
+  }
+  
+  .selectedUsers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+    
+  }
+  
+  .userChip {
+    background-color: #d1eaff;
+    color: #004a77;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    border: 1px solid #007bff;
+  }
+  
+  .removeBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff4444;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .darkContainer .userChip {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+  }
+  .userDropdown {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    max-height: 180px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+  }
+  .darkContainer .userDropdown {
+    background: #444;
+    border-color: #666;
+  }
+  .userListItem {
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .userListItem:hover {
+    background-color: #f0f0f0;
+  }
+  .darkContainer .userListItem:hover {
+    background-color: #555;
+  }
+  .noUser {
+    padding: 0.6rem 1rem;
+    color: #999;
+    font-style: italic;
+  }
+  
+  .userChip {
+    background-color: #d1eaff;
+    color: #004a77;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    border: 1px solid #007bff;
+    margin: 5px 8px 0 0;
+  }
+  
+  .removeBtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ff4444;
+    font-size: 1rem;
+    padding: 2px 6px;
+    transition: background 0.2s ease;
+  }
+  
+  .removeBtn:hover {
+    background-color: #ff4444; 
+    color: #b30000;            
+  }
+  
   

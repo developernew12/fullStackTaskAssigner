@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import instance from "../../../services/axiosInstance";
 import styles from "./createMeeting.module.css";
+import { AdminContext } from "../../../context/AdminContext";
+import { useSnackbar } from "notistack";
 
 const CreateMeeting = () => {
   const [topic, setTopic] = useState("");
@@ -8,6 +10,21 @@ const CreateMeeting = () => {
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [message, setMessage] = useState("");
+  const { darkMode } = useContext(AdminContext);
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(`.${styles.selectContainer}`)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -15,7 +32,6 @@ const CreateMeeting = () => {
         const res = await instance.get("/admin/all-users");
         setAllUsers(res.data);
         console.log("Fetched users:", res);
-        
       } catch (err) {
         console.error("Failed to load users", err);
       }
@@ -24,25 +40,38 @@ const CreateMeeting = () => {
   }, []);
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
+      if (assignedUsers.length === 0) {
+        enqueueSnackbar("Users should be assignned", { variant: "error" });
+        return;
+      }
       const res = await instance.post("/admin/create-meeting", {
         topic,
         scheduledAt,
         assignedUsers,
       });
-      setMessage(" Meeting created and emails sent!");
+
+      enqueueSnackbar("Meeting created and emails sent!", {
+        variant: "success",
+      });
       setTopic("");
       setScheduledAt("");
       setAssignedUsers([]);
     } catch (err) {
       console.error("Meeting creation failed", err);
-      setMessage(" Error creating meeting");
+      // setMessage(" ");
+      enqueueSnackbar("Error creating meeting", { variant: "error" });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className={styles.pageContainer}>
+    <div
+      className={`${darkMode ? styles.darkContainer : styles.pageContainer}`}
+    >
       <div className={styles.formBox}>
         <h2 className={styles.heading}>📅 Create a New Meeting</h2>
         {message && <p className={styles.message}>{message}</p>}
@@ -70,26 +99,86 @@ const CreateMeeting = () => {
             />
           </div>
 
-          <div>
+          <div className={styles.selectContainer}>
             <label className={styles.label}>Assign Users:</label>
-            <select
-              multiple
-              value={assignedUsers}
-              onChange={(e) =>
-                setAssignedUsers(Array.from(e.target.selectedOptions, (opt) => opt.value))
-              }
-              className={styles.selectBox}
-            >
-              {allUsers.map((user) => (
-                <option key={user._id} value={user._id}>
-                  {user.name}
-                </option>
-              ))}
-            </select>
+
+            <input
+              type="text"
+              placeholder="Search users by name or email"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onClick={() => setShowDropdown(true)}
+              className={styles.input}
+            />
+
+            {/* Dropdown list */}
+            {showDropdown && (
+              <ul className={styles.userDropdown}>
+                {allUsers
+                  .filter(
+                    (user) =>
+                      !assignedUsers.includes(user._id) &&
+                      (user.name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()) ||
+                        user.email
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase()))
+                  )
+                  .map((user) => (
+                    <li
+                      key={user._id}
+                      className={styles.userListItem}
+                      onClick={() => {
+                        setAssignedUsers([...assignedUsers, user._id]);
+                        setSearchTerm("");
+                        setShowDropdown(false);
+                      }}
+                    >
+                      {user.name} ({user.email})
+                    </li>
+                  ))}
+                {allUsers.filter(
+                  (user) =>
+                    !assignedUsers.includes(user._id) &&
+                    (user.name
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase()) ||
+                      user.email
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()))
+                ).length === 0 && (
+                  <li className={styles.noUser}>No users found</li>
+                )}
+              </ul>
+            )}
+
+            {/* Show selected users */}
+            <div className={styles.selectedUsers}>
+              {assignedUsers.map((userId) => {
+                const user = allUsers.find((u) => u._id === userId);
+                return user ? (
+                  <span key={user._id} className={styles.userChip}>
+                    {user.name}
+                    <button
+                      className={styles.removeBtn}
+                      onClick={() =>
+                        setAssignedUsers(
+                          assignedUsers.filter((id) => id !== user._id)
+                        )
+                      }
+                    >
+                      ⛔
+
+                    </button>
+                  </span>
+                ) : null;
+              })}
+            </div>
           </div>
 
           <button type="submit" className={styles.submitBtn}>
-            ✅ Create Meeting
+            {loading ? "Creating..." : "Create Meeting"}
           </button>
         </form>
       </div>

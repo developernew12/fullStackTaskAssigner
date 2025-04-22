@@ -20,7 +20,7 @@ const UserMeetings = () => {
   }, []);
 
   return (
-    <div className="meeting-container" style={{ padding: "2rem" }}>
+    <div className="meeting-container" style={{ padding: "2rem",height:"100vh" }}>
       <h2>Your Upcoming Meetings</h2>
       {meetings.length === 0 ? (
         <p>No meetings assigned.</p>

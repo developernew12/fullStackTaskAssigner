@@ -41,59 +41,55 @@ const AdminMeetings = () => {
       {meetings.length === 0 ? (
         <p>No meetings created.</p>
       ) : (
-        <ul>
-          {meetings.map((meeting) => (
-            <li key={meeting._id} style={{ marginBottom: "1.5rem" }}>
-              <strong>{meeting.topic}</strong>
-              <br />
-              Room ID: {meeting.roomId}
-              <br />
-              Password: {meeting.password}
-              <br />
-              Users: {meeting.assignedUsers.map((u) => u.name).join(", ")}
-              <br />
-              Time: {new Date(meeting.scheduledAt).toLocaleString()}
-              <br />
-              {/* Show status with priority: cancelled > live > not started */}
-              {meeting.isCancelled ? (
-                <span style={{ color: "red" }}>❌ Cancelled</span>
-              ) : meeting.isLive ? (
-                <span style={{ color: "limegreen" }}>🟢 Live</span>
-              ) : (
-                <span style={{ color: "orange" }}>⏳ Not Started</span>
-              )}
-              <br />
-              <br />
-              {/* Hide all action buttons if meeting is cancelled */}
-              {!meeting.isCancelled && (
-                <>
-                  <button onClick={() => handleStartMeeting(meeting._id)}>
-                    Start
-                  </button>
-                  <button
-                    onClick={() => handleCancelMeeting(meeting._id)}
-                    style={{
-                      marginLeft: "10px",
-                      background: "red",
-                      color: "white",
-                    }}
-                  >
-                    ❌ Cancel
-                  </button>
-                </>
-              )}
-              {/* Still allow "Open Jitsi" even if cancelled (optional) */}
-              <a
-                href={`https://meet.jit.si/${meeting.roomId}`}
-                target="_blank"
-                rel="noreferrer"
-                style={{ marginLeft: "10px" }}
-              >
-                🔗 Open Jitsi
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className={styles.gridContainer}>
+  {meetings.map((meeting) => (
+    <div key={meeting._id} className={styles.meetingCard}>
+      <h3 className={styles.topic}>{meeting.topic}</h3>
+      <p><strong>Room ID:</strong> {meeting.roomId}</p>
+      <p><strong>Password:</strong> {meeting.password}</p>
+      <p><strong>Users:</strong> {meeting.assignedUsers.map((u) => u.name).join(", ")}</p>
+      <p><strong>Time:</strong> {new Date(meeting.scheduledAt).toLocaleString()}</p>
+
+      <div className={styles.status}>
+        {meeting.isCancelled ? (
+          <span className={styles.cancelled}>❌ Cancelled</span>
+        ) : meeting.isLive ? (
+          <span className={styles.live}>🟢 Live</span>
+        ) : (
+          <span className={styles.pending}>⏳ Not Started</span>
+        )}
+      </div>
+
+      <div className={styles.actions}>
+        {!meeting.isCancelled && (
+          <>
+            <button
+              className={styles.startBtn}
+              onClick={() => handleStartMeeting(meeting._id)}
+            >
+              Start
+            </button>
+            <button
+              className={styles.cancelBtn}
+              onClick={() => handleCancelMeeting(meeting._id)}
+            >
+              ❌ Cancel
+            </button>
+          </>
+        )}
+        <a
+          href={`https://meet.jit.si/${meeting.roomId}`}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.jitsiBtn}
+        >
+          🔗 Open Jitsi
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
+
       )}
     </div>
   );

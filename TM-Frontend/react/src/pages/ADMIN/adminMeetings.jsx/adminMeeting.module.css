@@ -10,3 +10,98 @@
 .darkContainer h2{
     color: white;
 }
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .meetingCard {
+    background-color: #f7f9fc;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: -1px 4px 4px rgba(141, 141, 141, 0.8);
+  }
+  
+  .meetingCard:hover {
+    transform: scale(1.02);
+  }
+  
+  .topic {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .status {
+    margin: 0.5rem 0;
+    font-weight: bold;
+  }
+  
+  .cancelled {
+    color: red;
+  }
+  
+  .live {
+    color: limegreen;
+  }
+  
+  .pending {
+    color: orange;
+  }
+  
+  .actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .startBtn {
+    background-color: #2c7be5;
+    color: white;
+    border: none;
+    
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .cancelBtn {
+    background-color: red;
+    color: white;
+    border: none;
+   
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .jitsiBtn {
+    text-decoration: none;
+    background-color: #34a853;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+  
+  .darkContainer .meetingCard {
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  .darkContainer .jitsiBtn {
+    background-color: #4285f4;
+  }
+  
+  .darkContainer .startBtn {
+    background-color: #2c7be5;
+  }
+  
+  .darkContainer .cancelBtn {
+    background-color: #d9534f;
+  }
+  
