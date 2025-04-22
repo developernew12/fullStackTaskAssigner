@@ -24,6 +24,9 @@ import CreateTasks from "./pages/ADMIN/createTasks/CreateTasks";
 import AssignedTasks from "./pages/ADMIN/assignedTasks/AssignedTasks";
 import AllTasks from "./pages/ADMIN/allTasks/AllTasks";
 import TaskDetails from "./pages/taskDetails/TaskDetails";
+import UserMeetings from "./pages/userMeetings/UserMeetings";
+import AdminMeetings from "./pages/ADMIN/adminMeetings.jsx/AdminMeetings";
+import CreateMeeting from "./pages/ADMIN/createMetting/CreateMeeting";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +70,7 @@ const router = createBrowserRouter([
         children: [
           { path: "/user", element: <UserDashBoard /> },
           { path: "task/:taskId", element: <TaskDetails /> }, 
+          {path:"meetings", element: <UserMeetings />}, // Placeholder for meetings page
         ],
       },
       {
@@ -83,6 +87,8 @@ const router = createBrowserRouter([
           { path: "createTask", element: <CreateTasks /> },
           { path: "assignedTasks", element: <AssignedTasks /> },
           { path: "allTasks", element: <AllTasks /> },
+          { path: "meetings", element: <AdminMeetings /> },
+          { path: "create-meeting", element: <CreateMeeting /> },
         ],
       },
     ],

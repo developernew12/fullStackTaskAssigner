@@ -1,0 +1,77 @@
+.pageContainer {
+    background-color: #e4efff;
+    min-height: 100vh;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .formBox {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .heading {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #222;
+  }
+  
+  .message {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: green;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #333;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .selectBox {
+    width: 100%;
+    height: 150px;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .submitBtn {
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .submitBtn:hover {
+    background-color: #0056b3;
+  }
+  

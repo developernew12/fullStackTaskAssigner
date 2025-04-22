@@ -48,8 +48,8 @@ const UserDashBoard = () => {
 
   useEffect(() => {
     fetchTasks();
-    // const interval = setInterval(fetchTasks, 3500);
-    // return () => clearInterval(interval);
+    const interval = setInterval(fetchTasks, 350000);
+    return () => clearInterval(interval);
   }, []);
 
   const categorizedTasks = {

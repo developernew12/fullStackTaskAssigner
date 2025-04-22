@@ -84,6 +84,20 @@ const AdminHeader = () => {
           >
             <Link to="/admin/allTasks">allTasks</Link>
           </li>
+          <li
+            className={
+              location.pathname === "/admin/meetings" ? styles.active : ""
+            }
+          >
+            <Link to="/admin/meetings">meetings</Link>
+          </li>
+          <li
+            className={
+              location.pathname === "/admin/create-meeting" ? styles.active : ""
+            }
+          >
+            <Link to="/admin/create-meeting">Set Meeting</Link>
+          </li>
         </ul>
         <button styles={styles.logout} onClick={() => logout()}>
           Logout
@@ -145,6 +159,20 @@ const AdminHeader = () => {
             onClick={() => setMenuOpen(!menuOpen)}
           >
             <Link to="/admin/allTasks">allTasks</Link>
+          </li>
+          <li
+            className={
+              location.pathname === "/admin/meetings" ? styles.active : ""
+            }
+          >
+            <Link to="/admin/meetings">meetings</Link>
+          </li>
+          <li
+            className={
+              location.pathname === "/admin/create-meeting" ? styles.active : ""
+            }
+          >
+            <Link to="/admin/create-meeting">Set Meeting</Link>
           </li>
         </ul>
         <button styles={styles.logout} onClick={() => logout()}>
