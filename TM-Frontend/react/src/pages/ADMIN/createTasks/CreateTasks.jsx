@@ -91,8 +91,7 @@ const CreateTask = () => {
 
       enqueueSnackbar("Task created successfully!", { variant: "success" });
       setTaskData({ title: "", description: "", deadline: "" });
-      setSelectedUsers([]); // ✅ Reset properly
-      setSearchTerm("");
+      setSelectedUsers([]); 
     } catch (error) {
       enqueueSnackbar(
         error?.response?.data?.message || "Task creation failed",
