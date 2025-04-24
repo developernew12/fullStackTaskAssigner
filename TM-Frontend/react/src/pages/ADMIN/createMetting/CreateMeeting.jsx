@@ -81,6 +81,7 @@ const CreateMeeting = () => {
             <label className={styles.label}>Topic:</label>
             <input
               type="text"
+              placeholder="Enter meeting topic:"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               required

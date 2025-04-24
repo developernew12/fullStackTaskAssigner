@@ -15,9 +15,24 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
   }
+   
+  .heading {
+    text-align: center;
+    width: 25vw;
+    margin: auto;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 2rem;
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    background: #2942D1;
+  }
   
+
   .meetingCard {
     background-color: #f7f9fc;
+    max-width: 25vw;
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
