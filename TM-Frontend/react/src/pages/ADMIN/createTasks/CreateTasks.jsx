@@ -9,9 +9,10 @@ const CreateTask = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
   const [showDropdown, setShowDropdown] = useState(false);
-  const {darkMode} = useContext(AdminContext);
+  const { darkMode } = useContext(AdminContext);
   const [taskData, setTaskData] = useState({
     title: "",
     description: "",
@@ -41,8 +42,10 @@ const CreateTask = () => {
   }, [searchTerm, users]);
 
   const handleUserSelect = (user) => {
-    setSelectedUser(user);
-    setSearchTerm(user.name);
+    if (!selectedUsers.find((u) => u._id === user._id)) {
+      setSelectedUsers([...selectedUsers, user]);
+    }
+    setSearchTerm("");
     setShowDropdown(false);
   };
 
@@ -51,37 +54,50 @@ const CreateTask = () => {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
+     console.log("button clicked");
+     
     if (
       !taskData.title ||
       !taskData.description ||
       !taskData.deadline ||
-      !selectedUser
+      selectedUsers.length === 0
     ) {
       enqueueSnackbar("All fields are required!", { variant: "error" });
       return;
     }
+
     const now = new Date();
     const taskDeadline = new Date(taskData.deadline);
-    if(taskDeadline < now){
+    if (taskDeadline < now) {
       enqueueSnackbar("Date must be a future date", { variant: "error" });
       return;
     }
+
+    if (taskData.description.length < 10) {
+      enqueueSnackbar("Description must be at least 10 characters.", {
+        variant: "error",
+      });
+      return;
+    }
+
     try {
       await instance.post("/task/create", {
         title: taskData.title,
         description: taskData.description,
-        assignedTo: selectedUser._id,
+        assignedTo: selectedUsers.map((user) => user._id),
         deadline: taskData.deadline,
       });
 
       enqueueSnackbar("Task created successfully!", { variant: "success" });
       setTaskData({ title: "", description: "", deadline: "" });
-      setSelectedUser(null);
+      setSelectedUsers([]); // ✅ Reset properly
       setSearchTerm("");
     } catch (error) {
-      enqueueSnackbar(error.response.data.error.message, { variant: "error" });
+      enqueueSnackbar(
+        error?.response?.data?.message || "Task creation failed",
+        { variant: "error" }
+      );
       console.log(error);
     }
   };
@@ -130,7 +146,6 @@ const CreateTask = () => {
             placeholder="Search by email or click to see all users"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            // onFocus={() => setShowDropdown(true)}
             onClick={() => setShowDropdown((prev) => !prev)}
             className={styles.inputFields}
           />
@@ -150,13 +165,17 @@ const CreateTask = () => {
           )}
         </div>
 
-        {selectedUser && (
-          <p className={styles.selectedUser}>
-            Assigned To:{" "}
-            <strong>
-              {selectedUser.name} ({selectedUser.email})
-            </strong>
-          </p>
+        {selectedUsers.length > 0 && (
+          <div className={styles.selectedUser}>
+            <strong>Assigned To:</strong>
+            <ul>
+              {selectedUsers.map((user) => (
+                <li key={user._id}>
+                  {user.name} ({user.email})
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
         <input
@@ -167,7 +186,7 @@ const CreateTask = () => {
           className={styles.date}
           required
         />
-        
+
         <button type="submit" className={styles.submit}>
           Create Task
         </button>

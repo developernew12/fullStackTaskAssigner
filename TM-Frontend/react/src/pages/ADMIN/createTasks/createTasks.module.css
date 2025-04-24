@@ -133,6 +133,8 @@
   font-size: 1rem;
   color: #2b9348;
   font-weight: bold;
+  width: 70%;
+  overflow:scroll;
 }
 
 .noUser {
