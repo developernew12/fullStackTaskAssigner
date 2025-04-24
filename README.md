@@ -14,7 +14,7 @@
 MAIN FEATURES:
 
 
-1.A task assigner where admins can assign tasks to users.
+1.A task assigner where admins can assign tasks to users(Multiple Users can be Assigned).
 2.Deadlines can be set for each task.
 3.Users can update task status to In Progress or Done.
 4.If a deadline passes, the task is automatically marked as Not Done using node-cron.
@@ -93,6 +93,8 @@ An input field is provided to search users by name or email for quick access and
 
 5.![image](https://github.com/user-attachments/assets/154dc99d-3630-417e-b64b-d178f249f36b)
 ![image](https://github.com/user-attachments/assets/3a956884-2fe1-48ed-addf-0fc318299976)
+![image](https://github.com/user-attachments/assets/55d3cb71-baf7-4d76-8890-efc0bd02a339)
+
 This is the page where the admin can create and assign tasks to users.
 Admins can also search for users by name or email before assigning the task.
 
