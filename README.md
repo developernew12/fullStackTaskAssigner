@@ -14,20 +14,20 @@
 MAIN FEATURES:
 
 
-1.A task assigner where admins can assign tasks to users(Multiple Users can be Assigned).
-2.Deadlines can be set for each task.
-3.Users can update task status to In Progress or Done.
-4.If a deadline passes, the task is automatically marked as Not Done using node-cron.
-5.Admins can create meetings and assign users to them.
-6.Free video meetings are integrated using Jitsi Meet.
-7.Users can request deadline extensions.
-8.Admins can approve extension requests and set new deadlines.
-9.Users receive notifications when a meeting is created and they are selected for it.
-10.Meeting login details are also sent to their email.
-11.The site uses protected routes — only authorized users can access certain endpoints. Users can't access admin routes, and admins can't access user dashboards.
-12.Authentication is handled via cookies for login and logout.
-13.The design is fully responsive across all screen sizes.
-14.Both users and admins can switch between dark mode and light mode.
+1. A task assigner where admins can assign tasks to users (Multiple Users can be Assigned).  
+2. Deadlines can be set for each task.  
+3. Users can update task status to In Progress or Done.  
+4. If a deadline passes, the task is automatically marked as Not Done using node-cron.  
+5. Admins can create meetings and assign users to them.  
+6. Free video meetings are integrated using Jitsi Meet.  
+7. Users can request deadline extensions.  
+8. Admins can approve extension requests and set new deadlines.  
+9. Users receive notifications when a meeting is created and they are selected for it.  
+10. Meeting login details are also sent to their email.  
+11. The site uses protected routes — only authorized users can access certain endpoints. Users can't access admin routes, and admins can't access user dashboards.  
+12. Authentication is handled via cookies for login and logout.  
+13. The design is fully responsive across all screen sizes.  
+14. Both users and admins can switch between dark mode and light mode.  
 
 USER PAGE:
 1. ![image](https://github.com/user-attachments/assets/e539a01f-941b-44bb-ad8c-14788713dcfd)
