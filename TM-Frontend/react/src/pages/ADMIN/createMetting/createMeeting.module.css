@@ -15,6 +15,12 @@
     width: 100%;
     
   }
+  .heading{
+    background-color: #007bff;
+    padding: 2px;
+    border-radius: 200px;
+    border: 2px solid black;
+  }
   .darkContainer .formBox {
     background: #242020;
     color: white;
@@ -211,5 +217,10 @@
     background-color: #ff4444; 
     color: #b30000;            
   }
-  
-  
+  @media (max-width: 600px) {
+    /* styles for phones and small devices */
+    .heading{
+      font-size: 0.7em;
+    }
+    
+  }

@@ -207,8 +207,8 @@ button {
   position: fixed;
   top: 0;
   right: -200%;
-  width: 60%;
-  height: 80%;
+  width: 80%;
+  height: 90%;
   background-color: rgba(212, 225, 255, 0.9);
   color: rgb(0, 0, 0);
   display: flex;
@@ -217,11 +217,13 @@ button {
   justify-content: center;
   transition: right 0.5s ease-in-out;
   z-index: 1000000;
+ 
 }
 .mobileMenu ul {
   display: flex;
   flex-direction: column;
   color: rgb(0, 0, 0);
+ 
 }
 .mobileMenu ul li {
   margin: 4px 0;
@@ -236,6 +238,7 @@ button {
 
 .showMenu {
   right: 0;
+  
 }
 .mobileMenu a {
   color: white;

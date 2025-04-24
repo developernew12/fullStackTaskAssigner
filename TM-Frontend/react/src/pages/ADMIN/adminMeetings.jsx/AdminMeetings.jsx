@@ -37,7 +37,10 @@ const AdminMeetings = () => {
 
   return (
     <div className={`${darkMode ? styles.darkContainer : styles.mainContainer}`}>
-      <h2>All Scheduled Meetings</h2>
+      <div className={styles.heading2}>
+         <h2 >All Scheduled Meetings</h2>
+      </div>
+     
       {meetings.length === 0 ? (
         <p>No meetings created.</p>
       ) : (
