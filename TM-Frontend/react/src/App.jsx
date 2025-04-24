@@ -80,6 +80,7 @@ const router = createBrowserRouter([
             <AdminLayout />
           </ProtectedAdminRoute>
         ),
+        
         children: [
           { index: true, element: <AdminDashboard /> },
           { path: "extensionRequests", element: <ExtensionRequests /> },

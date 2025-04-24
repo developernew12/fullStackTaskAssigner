@@ -18,10 +18,10 @@ const UserMeetings = () => {
 
     fetchMeetings();
   }, []);
-
+  
   return (
     <div className="meeting-container" style={{ padding: "2rem",height:"100vh" }}>
-      <h2>Your Upcoming Meetings</h2>
+      <h2 style={{color:"white"}}>Your Upcoming Meetings</h2>
       {meetings.length === 0 ? (
         <p>No meetings assigned.</p>
       ) : (
